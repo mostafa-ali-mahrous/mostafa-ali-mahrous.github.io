@@ -240,6 +240,38 @@ body { background: #0b0d12; }
 #port-root .fact-card li svg { color: var(--accent); flex: none; }
 #port-root .ico svg { width: 26px; height: 26px; }
 #port-root .contact-box h2 svg { color: var(--accent); margin-right: 10px; vertical-align: -3px; }
+
+/* 3D app icons */
+#port-root .app-showcase { display: flex; gap: 64px; justify-content: center; align-items: flex-end; margin: 26px 0 40px; perspective: 900px; flex-wrap: wrap; }
+#port-root .app3d { position: relative; width: 132px; text-align: center; animation: appFloat 5.2s ease-in-out infinite; }
+#port-root .app3d.ae { animation-delay: -2.6s; }
+#port-root .app3d-face { position: relative; width: 132px; height: 132px; border-radius: 30px; display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(145deg, #10107a 0%, #00005b 55%, #000038 100%);
+  box-shadow: inset 0 2px 0 rgba(255,255,255,.28), inset 0 -14px 24px rgba(0,0,0,.55), inset 2px 0 0 rgba(255,255,255,.08), 0 24px 48px rgba(0,0,16,.6), 0 4px 10px rgba(0,0,0,.5);
+  transform: rotateX(14deg) rotateY(-16deg); transform-style: preserve-3d; animation: appTilt 6s ease-in-out infinite; }
+#port-root .app3d.ae .app3d-face { animation-delay: -3s; }
+#port-root .app3d-face::before { content: ""; position: absolute; inset: 0; border-radius: 30px;
+  background: linear-gradient(115deg, rgba(255,255,255,.34) 0%, rgba(255,255,255,.06) 28%, transparent 46%);
+  transform: translateZ(1px); pointer-events: none; }
+#port-root .app3d-face::after { content: ""; position: absolute; inset: -1px; border-radius: 31px; border: 1.5px solid rgba(153,153,255,.5); transform: translateZ(2px); pointer-events: none; }
+#port-root .app3d-face span { font-size: 58px; font-weight: 800; letter-spacing: -2px; color: #9999ff; transform: translateZ(26px);
+  text-shadow: 0 2px 0 rgba(0,0,20,.6), 0 0 26px rgba(153,153,255,.45); font-family: inherit; }
+#port-root .app3d small { display: block; margin-top: 18px; color: var(--muted); font-size: 13.5px; font-weight: 600; }
+#port-root .app3d-shadow { width: 92px; height: 15px; margin: 22px auto 0; border-radius: 50%; background: radial-gradient(ellipse at center, rgba(90,90,220,.5), transparent 68%); filter: blur(5px); animation: shPulse 5.2s ease-in-out infinite; }
+@keyframes appTilt { 0%,100% { transform: rotateX(14deg) rotateY(-16deg); } 50% { transform: rotateX(6deg) rotateY(14deg); } }
+@keyframes appFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-16px); } }
+@keyframes shPulse { 0%,100% { transform: scaleX(1); opacity:.9; } 50% { transform: scaleX(.72); opacity:.45; } }
+/* entrance */
+#port-root .app3d { opacity: 0; transform: translateY(46px) scale(.7); }
+#port-root .app3d.in { opacity: 1; transform: none; transition: opacity .7s ease, transform .8s cubic-bezier(.2,1.4,.4,1); }
+#port-root .app3d.in { animation: appFloat 5.2s ease-in-out infinite; }
+/* animation control widget */
+.anim-ctl { position: fixed; bottom: 18px; inset-inline-end: 18px; z-index: 60; display: flex; gap: 8px; align-items: center;
+  background: rgba(14,14,26,.82); border: 1px solid rgba(153,153,255,.25); border-radius: 999px; padding: 7px 12px; backdrop-filter: blur(10px); }
+.anim-ctl button { background: none; border: none; color: var(--accent2,#9999ff); cursor: pointer; font-size: 15px; padding: 2px 5px; }
+.anim-ctl .spd { display: flex; gap: 3px; }
+.anim-ctl .spd button { font-size: 11.5px; font-weight: 700; opacity: .55; }
+.anim-ctl .spd button.on { opacity: 1; text-decoration: underline; }
 </style>
 </head>
 <body>
@@ -357,6 +389,13 @@ body { background: #0b0d12; }
       <h2 data-en="Tools I work with" data-ar="الأدوات اللي بشتغل بيها">Tools I work with</h2>
     </div>
   </div>
+
+  <div class="wrap">
+    <div class="app-showcase">
+      <div class="app3d pr"><div class="app3d-face"><span>Pr</span></div><div class="app3d-shadow"></div><small>Adobe Premiere Pro</small></div>
+      <div class="app3d ae"><div class="app3d-face"><span>Ae</span></div><div class="app3d-shadow"></div><small>Adobe After Effects</small></div>
+    </div>
+  </div>
   <div class="marquee reveal">
     <div class="marquee-track">
       <div class="chip">Adobe Premiere Pro</div>
@@ -472,6 +511,15 @@ body { background: #0b0d12; }
 </footer>
 </div>
 
+
+<div class="anim-ctl" id="animCtl">
+  <button id="animToggle" title="Animation on/off" aria-label="Toggle animation"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg></button>
+  <div class="spd">
+    <button data-s="0.5">0.5x</button>
+    <button data-s="1" class="on">1x</button>
+    <button data-s="2">2x</button>
+  </div>
+</div>
 <script>
 (function(){
   var root = document.getElementById('port-root');
@@ -495,5 +543,44 @@ body { background: #0b0d12; }
 })();
 </script>
 
+
+<script>
+(function(){
+  var root = document.getElementById('port-root') || document.documentElement;
+  var blobs = document.querySelectorAll('#port-root [class*=blob], #port-root .blob');
+  var apps = document.querySelectorAll('#port-root .app3d, #port-root .app3d-face, #port-root .app3d-shadow');
+  var toggle = document.getElementById('animToggle');
+  var playing = true;
+  function setState(){
+    var st = playing ? 'running' : 'paused';
+    document.querySelectorAll('#port-root *').forEach(function(el){
+      var cs = getComputedStyle(el);
+      if (cs.animationName && cs.animationName !== 'none') el.style.animationPlayState = st;
+    });
+    toggle.innerHTML = playing ? '<svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>' : '<svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
+  }
+  toggle.addEventListener('click', function(){ playing = !playing; setState(); });
+  document.querySelectorAll('#animCtl .spd button').forEach(function(b){
+    b.addEventListener('click', function(){
+      document.querySelectorAll('#animCtl .spd button').forEach(function(x){ x.classList.remove('on'); });
+      b.classList.add('on');
+      var mult = parseFloat(b.dataset.s);
+      document.querySelectorAll('#port-root *').forEach(function(el){
+        var cs = getComputedStyle(el);
+        if (cs.animationName && cs.animationName !== 'none' && cs.animationDuration) {
+          var base = parseFloat(el.dataset.baseDur || cs.animationDuration);
+          if (!el.dataset.baseDur) el.dataset.baseDur = base;
+          el.style.animationDuration = (base / mult) + 's';
+        }
+      });
+    });
+  });
+  // entrance for 3d icons
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if (e.isIntersecting) e.target.classList.add('in'); });
+  }, {threshold:.25});
+  document.querySelectorAll('#port-root .app3d').forEach(function(el){ io.observe(el); });
+})();
+</script>
 </body>
 </html>
