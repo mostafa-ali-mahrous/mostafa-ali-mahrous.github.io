@@ -307,6 +307,31 @@ html { scroll-behavior: smooth; }
 #port-root .role-chip { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; color: var(--accent2); background: rgba(232,162,104,.10); border: 1px solid rgba(232,162,104,.26); border-radius: 999px; padding: 5px 11px; }
 #port-root .role-chip svg { flex: none; }
 #port-root .role-chip.hot { color: #f0b47e; background: rgba(232,162,104,.10); border-color: rgba(232,162,104,.3); }
+
+#port-root .reel-frame { border-radius: 18px; overflow: hidden; border: 1px solid var(--line); box-shadow: 0 24px 60px rgba(0,0,0,.45); background: #000; }
+#port-root .reel-frame video { display: block; width: 100%; aspect-ratio: 16/9; background: #000; }
+#port-root .price-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 26px; }
+@media (max-width: 720px) { #port-root .price-grid { grid-template-columns: 1fr; } }
+#port-root .price-card { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 30px; display: flex; flex-direction: column; gap: 14px; position: relative; overflow: hidden; }
+#port-root .price-card.hot { border-color: var(--accent); }
+#port-root .price-card .plan { color: var(--accent); font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; }
+#port-root[dir="rtl"] .price-card .plan { letter-spacing: 0; }
+#port-root .price-card .amount { font-size: 44px; font-weight: 800; color: var(--text); }
+#port-root .price-card .amount small { font-size: 15px; font-weight: 500; color: var(--muted); }
+#port-root .price-card p.desc { color: var(--muted); font-size: 15px; margin: 0; }
+#port-root .price-card ul { list-style: none; margin: 4px 0 10px; padding: 0; display: flex; flex-direction: column; gap: 9px; }
+#port-root .price-card ul li { display: flex; gap: 9px; align-items: flex-start; color: var(--muted); font-size: 14.5px; }
+#port-root .price-card ul li svg { flex: none; color: var(--accent); margin-top: 2px; }
+#port-root .price-note { text-align: center; color: var(--muted); font-size: 14px; margin-top: 26px; }
+#port-root .case-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 26px; }
+@media (max-width: 720px) { #port-root .case-grid { grid-template-columns: 1fr; } }
+#port-root .case-card { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 28px; }
+#port-root .case-card h3 { margin: 0 0 18px; font-size: 19px; color: var(--text); display: flex; align-items: center; gap: 9px; }
+#port-root .case-card h3 svg { color: var(--accent); flex: none; }
+#port-root .case-row { display: flex; flex-direction: column; gap: 5px; padding: 12px 0; border-top: 1px solid var(--line); }
+#port-root .case-row b { color: var(--accent2); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.6px; }
+#port-root[dir="rtl"] .case-row b { letter-spacing: 0; }
+#port-root .case-row span { color: var(--muted); font-size: 14.5px; line-height: 1.55; }
 </style>
 </head>
 <body>
@@ -319,7 +344,9 @@ html { scroll-behavior: smooth; }
   <div class="nav-in">
     <div class="logo" data-en="Mostafa<span>.</span>Ali" data-ar="مصطفى<span>.</span>علي">Mostafa<span>.</span>Ali</div>
     <div class="nav-links">
+      <a href="#showreel" data-en="Showreel" data-ar="الشوريل">Showreel</a>
       <a href="#work" data-en="Work" data-ar="الشغل">Work</a>
+      <a href="#pricing" data-en="Pricing" data-ar="الأسعار">Pricing</a>
       <a href="#services" data-en="Services" data-ar="الخدمات">Services</a>
       <a href="#contact" data-en="Contact" data-ar="التواصل">Contact</a>
       <button class="lang-toggle" id="langBtn" type="button">عربي</button>
@@ -360,6 +387,22 @@ html { scroll-behavior: smooth; }
     </div>
   </div>
 </header>
+
+<section id="showreel" style="background: var(--bg2);">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-kicker">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4h-4z"/></svg>
+        <span data-en="Showreel" data-ar="الشوريل">Showreel</span>
+      </div>
+      <h2 data-en="30 seconds of my best work" data-ar="٣٠ ثانية من أقوى شغلي">30 seconds of my best work</h2>
+    </div>
+    <div class="reel-frame reveal">
+      <video controls playsinline preload="none" poster="poster-showreel.jpg" src="showreel.mp4"></video>
+    </div>
+  </div>
+</section>
+
 
 <section id="about">
   <div class="wrap">
@@ -542,6 +585,91 @@ html { scroll-behavior: smooth; }
         <span data-en="Browse the full collection on Drive" data-ar="تصفح المجموعة كاملة على Drive">Browse the full collection on Drive</span>
       </a>
     </div>
+  </div>
+</section>
+
+<section id="cases">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-kicker">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/></svg>
+        <span data-en="Case studies" data-ar="دراسات حالة">Case studies</span>
+      </div>
+      <h2 data-en="Two projects, up close" data-ar="مشروعين عن قرب">Two projects, up close</h2>
+    </div>
+    <div class="case-grid">
+      <div class="case-card reveal">
+        <h3><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg><span data-en="A.C.P — Facebook reel" data-ar="A.C.P — ريل فيسبوك">A.C.P — Facebook reel</span></h3>
+        <div class="case-row" style="border-top:none; padding-top:0;">
+          <b data-en="The problem" data-ar="المشكلة">The problem</b>
+          <span data-en="Raw salon footage that had to hold attention on Facebook reels without any paid promotion." data-ar="فيديو خام من الصالون لازم يمسك انتباه المشاهد على ريلز فيسبوك من غير أي إعلانات مدفوعة.">Raw salon footage that had to hold attention on Facebook reels without any paid promotion.</span>
+        </div>
+        <div class="case-row">
+          <b data-en="The work" data-ar="الشغل">The work</b>
+          <span data-en="Full edit with pacing, cuts and Arabic subtitles built for silent viewing on mobile." data-ar="مونتاج كامل بإيقاع وقطعات وترجمة عربية مصممة للمشاهدة بدون صوت على الموبايل.">Full edit with pacing, cuts and Arabic subtitles built for silent viewing on mobile.</span>
+        </div>
+        <div class="case-row">
+          <b data-en="The result" data-ar="النتيجة">The result</b>
+          <span data-en="24.8K organic views on one reel." data-ar="24.8 ألف مشاهدة أورجانيك على ريل واحد.">24.8K organic views on one reel.</span>
+        </div>
+      </div>
+      <div class="case-card reveal d1">
+        <h3><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg><span data-en="One Step — AI product ad" data-ar="One Step — إعلان منتج بالذكاء الاصطناعي">One Step — AI product ad</span></h3>
+        <div class="case-row" style="border-top:none; padding-top:0;">
+          <b data-en="The problem" data-ar="المشكلة">The problem</b>
+          <span data-en="A client in the Saudi market needed a striking product ad for a wheel brand, without a video shoot." data-ar="عميل في السوق السعودي محتاج إعلان قوي لمنتج جنوط، من غير تصوير فيديو.">A client in the Saudi market needed a striking product ad for a wheel brand, without a video shoot.</span>
+        </div>
+        <div class="case-row">
+          <b data-en="The work" data-ar="الشغل">The work</b>
+          <span data-en="Concept, AI video generation and final edit — from a blank page to a finished ad." data-ar="الفكرة وتوليد الفيديو بالذكاء الاصطناعي والمونتاج النهائي — من صفحة فاضية لإعلان جاهز.">Concept, AI video generation and final edit — from a blank page to a finished ad.</span>
+        </div>
+        <div class="case-row">
+          <b data-en="The result" data-ar="النتيجة">The result</b>
+          <span data-en="A ready-to-publish product ad, delivered without a single day of shooting." data-ar="إعلان منتج جاهز للنشر، اتسلم من غير ولا يوم تصوير.">A ready-to-publish product ad, delivered without a single day of shooting.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="pricing" style="background: var(--bg2);">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-kicker">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg>
+        <span data-en="Pricing" data-ar="الأسعار">Pricing</span>
+      </div>
+      <h2 data-en="Simple, honest pricing" data-ar="أسعار بسيطة وواضحة">Simple, honest pricing</h2>
+    </div>
+    <div class="price-grid">
+      <div class="price-card reveal">
+        <span class="plan" data-en="Single reel" data-ar="ريل واحد">Single reel</span>
+        <div class="amount">$50 <small data-en="/ 90-second reel" data-ar="/ ريل ٩٠ ثانية">/ 90-second reel</small></div>
+        <p class="desc" data-en="One finished short-form video, edited end to end." data-ar="فيديو قصير واحد جاهز، مونتاج كامل من الأول للآخر.">One finished short-form video, edited end to end.</p>
+        <ul>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg><span data-en="Full edit, color and sound" data-ar="مونتاج وتلوين وصوت كامل">Full edit, color and sound</span></li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg><span data-en="Subtitles included" data-ar="الترجمة متضمنة">Subtitles included</span></li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg><span data-en="Ready for reels, TikTok and Shorts" data-ar="جاهز لريلز وتيك توك وشورتس">Ready for reels, TikTok and Shorts</span></li>
+        </ul>
+        <a class="btn btn-ghost" href="https://wa.me/201153773391?text=Hi+Mostafa%2C+I%27d+like+to+order+a+reel." target="_blank" rel="noopener" style="justify-content:center;">
+          <span data-en="Order on WhatsApp" data-ar="اطلب على واتساب">Order on WhatsApp</span>
+        </a>
+      </div>
+      <div class="price-card hot reveal d1">
+        <span class="plan" data-en="Monthly package" data-ar="الباقة الشهرية">Monthly package</span>
+        <div class="amount">$350 <small data-en="/ month" data-ar="/ شهر">/ month</small></div>
+        <p class="desc" data-en="8 reels every month — steady content for your brand." data-ar="٨ ريلز كل شهر — محتوى ثابت لبراندك.">8 reels every month — steady content for your brand.</p>
+        <ul>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg><span data-en="8 edited reels per month" data-ar="٨ ريلز ممنتجة في الشهر">8 edited reels per month</span></li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg><span data-en="Everything in the single reel, at a better rate" data-ar="كل مميزات الريل الواحد بسعر أوفر">Everything in the single reel, at a better rate</span></li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg><span data-en="Consistent style across your content" data-ar="ستايل ثابت في كل محتواك">Consistent style across your content</span></li>
+        </ul>
+        <a class="btn btn-primary" href="https://wa.me/201153773391?text=Hi+Mostafa%2C+I%27m+interested+in+the+monthly+package." target="_blank" rel="noopener" style="justify-content:center;">
+          <span data-en="Start on WhatsApp" data-ar="ابدأ على واتساب">Start on WhatsApp</span>
+        </a>
+      </div>
+    </div>
+    <p class="price-note reveal" data-en="Bigger project or a different format? Message me and we price it together." data-ar="مشروع أكبر أو فورمات مختلف؟ ابعتلي ونظبط السعر مع بعض.">Bigger project or a different format? Message me and we price it together.</p>
   </div>
 </section>
 
